@@ -9,11 +9,12 @@ require_relative './exercise_6'
 puts "Exercise 7"
 puts "----------"
 
-puts "Please provide a store name"
+puts "Please provide a name for your store:"
 store_name = gets.chomp
 
-new_store = Store.create(name: store_name)
+new_store = Store.new(name: store_name)
 
+puts "*****************************************"
 if (!new_store.valid?)
   new_store.errors.messages.each do |key, value|
     puts "#{key}: #{value[0]}"
@@ -21,3 +22,4 @@ if (!new_store.valid?)
 else
   new_store.save
 end
+puts "*****************************************"
