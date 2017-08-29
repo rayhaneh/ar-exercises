@@ -3,6 +3,10 @@ require_relative '../setup'
 puts "Exercise 1"
 puts "----------"
 
+class Store < ActiveRecord::Base
+  has_many :employees
+end
+
 # Create the First Store
 Store.create(name: 'Burnaby', annual_revenue: 300000, mens_apparel: true, womens_apparel: true)
 Store.create(name: 'Richmond', annual_revenue: 1260000, mens_apparel: false, womens_apparel: true)
