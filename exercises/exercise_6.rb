@@ -19,6 +19,7 @@ class Employee < ActiveRecord::Base
   after_create  :generate_password_after_create
   # before_save :generate_password_before_save
 
+
   private
 
   def generate_password_before_create

@@ -11,16 +11,18 @@ require_relative './exercise_8'
 
 # Make sure non-empty stores cannot be destroyed
 @store1 = Store.find(1)
-if @store1.destroy
-  puts "Store destroyed! It has #{@store1.employees.size} =/"
-else
-  puts "Could not destroy store :)"
+if !@store1.destroy
+  @store1.errors.messages.each do |key, value|
+    puts "#{key}: #{value[0]}"
+  end
 end
+puts "Number of employees: #{@store1.employees.count}"
 
 # Make sure empty stores can be destroyed
-@empty_store = Store.create!(name: 'Test Empty Store', annual_revenue: 0)
-if @empty_store.destroy
-  puts "Empty Store destroyed! This is good"
-else
-  puts "Whoa! Empty store should be destroyable... Not cool!"
+@empty_store = Store.create!(name: 'Test Empty Store', annual_revenue: 0, mens_apparel: true)
+if !@empty_store.destroy
+  @empty_store.errors.messages.each do |key, value|
+    puts "#{key}: #{value[0]}"
+  end
 end
+puts "Number of employees: #{@empty_store.employees.count}"

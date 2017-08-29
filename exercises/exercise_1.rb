@@ -12,6 +12,18 @@ class Store < ActiveRecord::Base
   def must_carry_mens_or_womens_apparel
     errors.add(:base, "Store must carry either women's or men's apparel.") if (!mens_apparel && !womens_apparel)
   end
+
+  before_destroy :check_for_employees
+
+  private
+
+  def check_for_employees
+    if self.employees.count > 0
+      errors[:base] << "You cannot delete a store which has employees."
+      false
+    end
+  end
+
 end
 
 # Create the First Store
